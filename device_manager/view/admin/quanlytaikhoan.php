@@ -76,17 +76,88 @@ $lop = danhsachlop();
                                 <input type="text" name="diachi" value="<?php echo $each['dia_chi']?>" >
                                 <label>số điện thoại: </label>
                                 <input type="text" name="sdt" value="<?php echo $each['sdt']?>" >
-                                <hr>
                                 <input class="submit" type="submit"  value="Cập nhật thông tin" name="capnhat">
                             </form>
                         </div>
                     </div>
                 </td>
                 <?php if($each['state'] == 'kích hoạt'){?>
-                    <td><a class="button" href="index.php?act=vohieuhoa&mataikhoan=<?php echo $each['ms'] ?>" style="background-color: #bd2130"> vô hiệu hóa</a></td>
+                    <td ><div class="box">
+                            <a class="button" href="#popup2&mataikhoan=<?php echo $each['ms']?>" style="background-color: #bd2130 ">Vô Hiệu Hóa</a>
+                        </div>
+                        <div id="popup2&mataikhoan=<?php echo $each['ms']?>" class="overlay" style="top: -150px">
+                            <div class="popup">
+                                <form action="index.php?act=vohieuhoa&mataikhoan=<?php echo $each['ms'] ?>" method="post" >
+                                    <h1> Sửa phòng</h1>
+                                    <a class="close" href="#">&times;</a>
+                                    <label>Tên: </label>
+                                    <input type="text" name="tentaikhoan" value="<?php echo $each['ten_tai_khoan']?>" readonly>
+                                    <label>email: </label>
+                                    <input type="text" name="email" value="<?php echo $each['email']?>" readonly>
+                                    <label>password: </label>
+                                    <input type="text" name="pass" value="<?php echo $each['password']?>" readonly>
+                                    <label>role: </label>
+                                    <input type="text" name="role" value="<?php echo $each['role']?>" readonly>
+                                    <label>tên lớp: </label>
+                                    <input type="text" name="lop" value="<?php echo $each['ten_lop']?>" readonly>
+                                    <input type="hidden" name="idclass" value="<?php echo $each['id_class']?>" >
+                                    <label>Hình ảnh: </label>
+                                    <input type="file" name="img" value="<?php echo $each['img']?>" readonly>
+                                    <br>
+                                    <label>trạng thái: </label>
+                                    <input type="text" name="state" value="<?php echo $each['state']?>" readonly>
+                                    <label>ngày sinh: </label>
+                                    <input type="text" name="ngaysinh" value="<?php echo $each['ngay_sinh']?>" readonly>
+                                    <label> Giới tính: </label>
+                                    <input type="text" name="gioitinh" value="<?php echo $each['gioi_tinh']?>" readonly>
+                                    <label>Địa chỉ: </label>
+                                    <input type="text" name="diachi" value="<?php echo $each['dia_chi']?>" readonly>
+                                    <label>số điện thoại: </label>
+                                    <input type="text" name="sdt" value="<?php echo $each['sdt']?>" readonly>
+                                    <input class="submit" type="submit"  value="Vô Hiệu hóa tài khoản" name="vohieuhoa" style="background-color: #bd2130">
+                                </form>
+                            </div>
+                        </div>
+                    </td>
                 <?php } ?>
                 <?php if($each['state'] == 'vô hiệu hóa'){?>
-                    <td><a class="button" href="index.php?act=kichhoat&mataikhoan=<?php echo $each['ms'] ?>" style="background-color: #1e7e34"> kích hoạt lại</a></td>
+                    <td ><div class="box">
+                            <a class="button" href="#popup3&mataikhoan=<?php echo $each['ms']?>" style="background-color: #1e7e34  ">Kích Hoạt lại</a>
+                        </div>
+                        <div id="popup3&mataikhoan=<?php echo $each['ms']?>" class="overlay" style="top: -150px">
+                            <div class="popup">
+                                <form action="index.php?act=kichhoatlai&mataikhoan=<?php echo $each['ms'] ?>" method="post" >
+                                    <h1> Sửa phòng</h1>
+                                    <a class="close" href="#">&times;</a>
+                                    <label>Tên: </label>
+                                    <input type="text" name="tentaikhoan" value="<?php echo $each['ten_tai_khoan']?>" readonly>
+                                    <label>email: </label>
+                                    <input type="text" name="email" value="<?php echo $each['email']?>" readonly>
+                                    <label>password: </label>
+                                    <input type="text" name="pass" value="<?php echo $each['password']?>" readonly>
+                                    <label>role: </label>
+                                    <input type="text" name="role" value="<?php echo $each['role']?>" readonly>
+                                    <label>tên lớp: </label>
+                                    <input type="text" name="lop" value="<?php echo $each['ten_lop']?>" readonly>
+                                    <input type="hidden" name="idlop" value="<?php echo $each['id_class']?>" >
+                                    <label>Hình ảnh: </label>
+                                    <input type="file" name="img" value="<?php echo $each['img']?>" readonly>
+                                    <br>
+                                    <label>trạng thái: </label>
+                                    <input type="text" name="state" value="<?php echo $each['state']?>" readonly>
+                                    <label>ngày sinh: </label>
+                                    <input type="text" name="ngaysinh" value="<?php echo $each['ngay_sinh']?>" readonly>
+                                    <label> Giới tính: </label>
+                                    <input type="text" name="gioitinh" value="<?php echo $each['gioi_tinh']?>" readonly>
+                                    <label>Địa chỉ: </label>
+                                    <input type="text" name="diachi" value="<?php echo $each['dia_chi']?>" readonly>
+                                    <label>số điện thoại: </label>
+                                    <input type="text" name="sdt" value="<?php echo $each['sdt']?>" readonly>
+                                    <input class="submit" type="submit"  value=" Kích hoạt lại tài khoản" name="kichhoatlai" style="background-color: #1e7e34">
+                                </form>
+                            </div>
+                        </div>
+                    </td>
                 <?php } ?>
         <?php } ?>
     </table>

@@ -13,9 +13,9 @@ $update = "UPDATE danh_sach_yeu_cau_phong
             where id_yeu_cau='$id_yeu_cau'";
 $kq = mysqli_query($conn,$update);
 
-$xoangaycu = "delete from danh_sach_muon_phong
+/*$xoangaycu = "delete from danh_sach_muon_phong
             where id_phong='$idphong'
             and ngay_muon < '$thoigianmuon'";
-$truyvanxoangaycu = mysqli_query($conn,$xoangaycu);
+$truyvanxoangaycu = mysqli_query($conn,$xoangaycu);*/
 
 $conn->close();

@@ -3,10 +3,10 @@
     <div style="width: 100%; display: flex">
         <div id="login-form" style="">
             <form id="changePasswordForm" action="index.php?act=themtanghoc" method="post">
-                <h1> Thêm phòng học</h1>
+                <h1> Thêm tầng</h1>
 
                 <br>
-                <label>Tên phòng </label>
+                <label>Tên tầng </label>
                 <input type="text" name="tentang" value="" required>
                 <hr>
                 <br>

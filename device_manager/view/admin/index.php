@@ -128,6 +128,7 @@ $anh =$_SESSION['img'];
             break;
         case 'themtang':
             require '../../model/all_tang.php';
+            require 'nav_mac_dinh.php';
             require 'themtang.php';
             break;
         case 'themtanghoc':
@@ -162,6 +163,35 @@ $anh =$_SESSION['img'];
             require '../../model/capnhatthongtintaikhoan.php';
             header('location:index.php?act=danhsachtaikhoan');
             break;
+        case 'themtaikhoan':
+            require '../../model/demlop.php';
+            require 'nav_mac_dinh.php';
+            require 'themtaikhoan.php';
+            break;
+        case 'addaccount':
+            $tentaikhoan = $_POST['tentaikhoan'];
+            $pass = md5($_POST['pass']);
+            $email = $_POST['email'];
+            $role = $_POST['role'];
+            $idlop = $_POST['lop'];
+            $img = $_POST['img'];
+            $state = $_POST['state'];
+            $ngaysinh = $_POST['ngaysinh'];
+            $gioitinh = $_POST['gioitinh'];
+            $diachi = $_POST['diachi'];
+            $sdt = $_POST['sdt'];
+            $ma = $_POST['ms'];
+            require '../../model/themtaikhoan.php';
+            header('location:index.php?act=danhsachtaikhoan');
+            break;
+        case 'vohieuhoa':
+            $tensinhvien = $_POST['tentaikhoan'];
+            $email = $_POST['email'];
+            $idclass = $_POST['idclass'];
+            $ma = $_GET['mataikhoan'];
+            require '../../model/adminvohieutaikhoan.php';
+            header('location:index.php?act=danhsachtaikhoan');
+            break;
     }
     ?>
     </section>
@@ -187,33 +217,3 @@ $anh =$_SESSION['img'];
 </body>
 </html>
 
-<label>Tên: </label>
-<input type="text" name="tentaikhoan" value="<?php echo $each['ten_tai_khoan']?>" >
-<label>email: </label>
-<input type="text" name="email" value="<?php echo $each['email']?>" >
-<label>password: </label>
-<input type="text" name="pass" value="<?php echo $each['password']?>" >
-<label>role: </label>
-<select name="role" >
-    <option value="nhanvienquanly">Nhân viên quản lý</option>
-    <option value="sinhvien">Sinh viên</option>
-    <option value="admin">admin</option>
-    <option value="giaovien">Giáo viên</option>
-</select>
-<label>tên lớp: </label>
-<input type="text" name="tenlop" value="<?php echo $each['ten_lop']?>" >
-<label>Hình ảnh: </label>
-<img src="<?php echo $each['img']?>" readonly="">
-<input type="file" name="img" value="<?php echo $each['img']?>" >
-<br>
-<label>trạng thái: </label>
-<input type="text" name="state" value="<?php echo $each['state']?>" >
-<label>ngày sinh: </label>
-<input type="text" name="ngaysinh" value="<?php echo $each['ngay_sinh']?>" >
-<label> Giới tính: </label>
-<input type="text" name="gioitinh" value="<?php echo $each['gioi_tinh']?>" >
-<label>Địa chỉ: </label>
-<input type="text" name="diachi" value="<?php echo $each['dia_chi']?>" >
-<label>số điện thoại: </label>
-<input type="text" name="sdt" value="<?php echo $each['sdt']?>" >
-<hr>

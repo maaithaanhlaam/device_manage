@@ -21,9 +21,8 @@ $sql = "select email from account where id_class = '$idclass' and role = 'giaovi
 $result = mysqli_query($conn,$sql);
 while ($row = $result->fetch_assoc()) {
     $emailgiaovien = $row['email'];
-}
-$mailgiaovien = new Mailer();
-$noidungemailgiaovien = "<p>thư thông báo vô hiệu hóa tài khoản sinh viên thuộc lớp quản lý của anh/chị </p>
+    $mailgiaovien = new Mailer();
+    $noidungemailgiaovien = "<p>thư thông báo vô hiệu hóa tài khoản sinh viên thuộc lớp quản lý của anh/chị </p>
                     <p>Tên sinh viên: ".$tensinhvien."</p>
                      <p>Email sinh viên: ".$email."</p>
                    <p>mssv: ".$mssv." </p>
@@ -31,7 +30,9 @@ $noidungemailgiaovien = "<p>thư thông báo vô hiệu hóa tài khoản sinh v
                    <p>Ngày mượn: ".$ngaymuon."</p>
                    <p>Mã mượn: ".$idmuon." </p>
                    <p>Anh/chị có trách nhiệm nhắc nhở sinh viên ".$tensinhvien." đến làm việc với nhân viên quản lý sớm nhất</p>";
-$mailgiaovien->guimailcanhbao($emailgiaovien,$tieude,$noidungemailgiaovien);
+    $mailgiaovien->guimailcanhbao($emailgiaovien,$tieude,$noidungemailgiaovien);
+}
+
 
 $vohieutaikhoan = "UPDATE account
             SET state = 'vô hiệu hóa'

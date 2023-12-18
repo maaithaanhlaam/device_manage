@@ -1,7 +1,7 @@
 <?php
 include 'connectdb.php';
 
-function tracuuycmuonphongsv($ms,$offset){
+function tracuuycmuonphongsv($ms,$offset,$noidung,$ngayTimKiem){
     $conn = connect();
     mysqli_set_charset($conn,'utf8');
 $sql="SELECT
@@ -23,7 +23,7 @@ LEFT JOIN
 LEFT JOIN
     account ON danh_sach_yeu_cau_phong.id_account = account.ms
 WHERE
-    danh_sach_yeu_cau_phong.id_account= '$ms' AND 
+    danh_sach_yeu_cau_phong.id_account= '$ms'  AND (phong_hoc.ten_phong like '%$noidung%' AND danh_sach_yeu_cau_phong.ngay_muon like '%$ngayTimKiem%')AND
     ((trang_thai = 'hủy yêu cầu mượn'
     AND NOT EXISTS (
         SELECT 1
@@ -54,7 +54,7 @@ ORDER BY danh_sach_yeu_cau_phong.ngay_muon DESC LIMIT 5 offset ".$offset." ";
     return $kqtracuulop;
     $conn->close();
 }
-function demkqtracuumuon($ms){
+function demkqtracuumuon($ms,$noidung,$ngayTimKiem){
     $conn = connect();
     mysqli_set_charset($conn,'utf8');
     $sql="SELECT
@@ -76,7 +76,7 @@ LEFT JOIN
 LEFT JOIN
     account ON danh_sach_yeu_cau_phong.id_account = account.ms
 WHERE
-    danh_sach_yeu_cau_phong.id_account= '$ms' AND 
+    danh_sach_yeu_cau_phong.id_account= '$ms' AND (phong_hoc.ten_phong like '%$noidung%' AND danh_sach_yeu_cau_phong.ngay_muon like '%$ngayTimKiem%')AND
     ((trang_thai = 'hủy yêu cầu mượn'
     AND NOT EXISTS (
         SELECT 1

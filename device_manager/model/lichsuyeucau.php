@@ -1,7 +1,7 @@
 <?php
 include 'connectdb.php';
 
-function tracuuyc($offset){
+function tracuuyc($offset,$noidung,$ngayTimKiem ){
     $conn = connect();
     mysqli_set_charset($conn,'utf8');
 $sql="SELECT
@@ -27,6 +27,7 @@ LEFT JOIN
     account ON danh_sach_yeu_cau_phong.id_account = account.ms
 LEFT JOIN
     class ON account.id_class = class.id_class
+where phong_hoc.ten_phong like '%$noidung%' AND danh_sach_yeu_cau_phong.ngay_muon like '%$ngayTimKiem%'
 GROUP BY
     danh_sach_yeu_cau_phong.id_phong,
     danh_sach_yeu_cau_phong.ngay_muon,
@@ -40,7 +41,7 @@ ORDER BY ngay_dang_ky desc LIMIT 5 offset ".$offset."
     return $kqtracuulop;
     $conn->close();
 }
-function demtracuuyc(){
+function demtracuuyc($noidung,$ngayTimKiem ){
     $conn = connect();
     mysqli_set_charset($conn,'utf8');
     $sql="SELECT
@@ -66,6 +67,7 @@ LEFT JOIN
     account ON danh_sach_yeu_cau_phong.id_account = account.ms
 LEFT JOIN
     class ON account.id_class = class.id_class
+where phong_hoc.ten_phong like '%$noidung%' AND danh_sach_yeu_cau_phong.ngay_muon like '%$ngayTimKiem%'
 GROUP BY
     danh_sach_yeu_cau_phong.id_phong,
     danh_sach_yeu_cau_phong.ngay_muon,

@@ -63,6 +63,10 @@ $anh =$_SESSION['img'];
             }
             switch ($act){
                 case '':
+                    unset($_SESSION['noidungtimkiemlichsusv']);
+                    unset($_SESSION['ngaytimkiemlichsusv']);
+                    unset( $_SESSION['noidungtimkiemphongdamuon']);
+                    unset( $_SESSION['ngaytimkiemphongdamuon']);
                     $mssv = $_SESSION['account'];
                     require 'nav_mac_dinh.php';
                     require '../../model/profileuser.php';
@@ -70,6 +74,7 @@ $anh =$_SESSION['img'];
                     break;
                 case 'signout':
                     unset($_SESSION['name']);
+                    unset($_SESSION['ngaytimkiemlichsusv']);
                     unset($_SESSION['account']);
                     unset($_SESSION['email']);
                     unset($_SESSION['pass']);
@@ -79,9 +84,16 @@ $anh =$_SESSION['img'];
                     unset( $_SESSION['mindate']);
                     unset( $_SESSION['maxdate']);
                     unset($_SESSION['ngaymuon']);
+                    unset($_SESSION['noidungtimkiemlichsusv']);
+                    unset( $_SESSION['noidungtimkiemphongdamuon']);
+                    unset( $_SESSION['ngaytimkiemphongdamuon']);
                     header('location: ../../index.php');
                     break;
                 case 'showtang':
+                    unset( $_SESSION['noidungtimkiemphongdamuon']);
+                    unset( $_SESSION['ngaytimkiemphongdamuon']);
+                    unset($_SESSION['ngaytimkiemlichsusv']);
+                    unset($_SESSION['noidungtimkiemlichsusv']);
                     $ngay = isset($_SESSION['ngaymuon']) ? $_SESSION['ngaymuon'] : date('Y-m-d') ;
                     $ma = isset($_GET['ma'])?$_GET['ma']:1 ;
                     require '../../model/all_tang.php';
@@ -146,13 +158,45 @@ $anh =$_SESSION['img'];
                     header('location:index.php?act=danhsachyeucau');
                     break;
                 case 'danhsachyeucau':
+                    unset( $_SESSION['noidungtimkiemphongdamuon']);
+                    unset( $_SESSION['ngaytimkiemphongdamuon']);
                     $ms = $_SESSION['account'];
+                    if(!isset($_SESSION['noidungtimkiemlichsusv'])&& !isset($_SESSION['ngaytimkiemlichsusv'])){
+                        $noidung = 'phòng ';
+                        $ngayTimKiem ='2023';
+                    }
+                    if(isset($_SESSION['noidungtimkiemlichsusv'])&& isset($_SESSION['ngaytimkiemlichsusv'])){
+                        $noidung = $_SESSION['noidungtimkiemlichsusv'];
+                        $ngayTimKiem = $_SESSION['ngaytimkiemlichsusv'];
+                    }
+                    if(isset($_POST['noidungtimkiemlichsusv'])) {
+                        $ngayTimKiem = $_POST['ngaytimkiem'];
+                        $noidung = $_POST['noidungtimkiemlichsusv'];
+                        $_SESSION['noidungtimkiemlichsusv'] = $noidung;
+                        $_SESSION['ngaytimkiemlichsusv'] = $ngayTimKiem;
+                    }
                     require 'nav_mac_dinh.php';
                     require '../../model/danhsachyeucaumuonphongsv.php';
                     require 'danhsachyeucaumuonphong.php';
                     break;
                 case 'danhsachmuon':
+                    unset($_SESSION['noidungtimkiemlichsusv']);
+                    unset($_SESSION['ngaytimkiemlichsusv']);
                     $ms = $_SESSION['account'];
+                    if(!isset($_SESSION['noidungtimkiemphongdamuon'])&& !isset($_SESSION['ngaytimkiemphongdamuon'])){
+                        $noidung = 'phòng ';
+                        $ngayTimKiem ='2023';
+                    }
+                    if(isset($_SESSION['noidungtimkiemphongdamuon'])&& isset($_SESSION['ngaytimkiemphongdamuon'])){
+                        $noidung = $_SESSION['noidungtimkiemphongdamuon'];
+                        $ngayTimKiem = $_SESSION['ngaytimkiemphongdamuon'];
+                    }
+                    if(isset($_POST['noidungtimkiemphongdamuon'])) {
+                        $ngayTimKiem = $_POST['ngaytimkiem'];
+                        $noidung = $_POST['noidungtimkiemphongdamuon'];
+                        $_SESSION['noidungtimkiemphongdamuon'] = $noidung;
+                        $_SESSION['ngaytimkiemphongdamuon'] = $ngayTimKiem;
+                    }
                     require 'nav_mac_dinh.php';
                     require '../../model/danhsachphongdamuon.php';
                     require 'danhsachphongdamuon.php';
@@ -164,12 +208,15 @@ $anh =$_SESSION['img'];
                     header('location:index.php?act=danhsachyeucau');
                     break;
                 case 'changepass':
+                    unset( $_SESSION['noidungtimkiemphongdamuon']);
+                    unset( $_SESSION['ngaytimkiemphongdamuon']);
+                    unset($_SESSION['noidungtimkiemlichsusv']);
+                    unset($_SESSION['ngaytimkiemlichsusv']);
                     $email=$_SESSION['email'];
                     $img = $_SESSION['img'];
                     require 'nav_mac_dinh.php';
                     require 'changepass.php';
                     break;
-
             }
         ?>
     </section>

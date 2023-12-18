@@ -1,6 +1,6 @@
 <?php
 include 'connectdb.php';
-function danhsachtaikhoanluuy($offset){
+function danhsachtaikhoanluuy($offset,$noidung){
     $conn= connect();
     mysqli_set_charset($conn,'utf8');
     $sql="Select MAX(danh_sach_luu_y.id_luu_y) AS id_luu_y,
@@ -27,13 +27,14 @@ LEFT JOIN
     account ON danh_sach_luu_y.id_account = account.ms
 LEFT JOIN
     class ON account.id_class = class.id_class
+where account.ten_tai_khoan like '%$noidung%' OR account.ms like '%$noidung%'
   GROUP BY account.ms  LIMIT 5 offset ".$offset."";
 
     $result = mysqli_query($conn,$sql);
     return $result;
     $conn->close();
 }
-function demtaikhoanluuy(){
+function demtaikhoanluuy($noidung){
     $conn= connect();
     mysqli_set_charset($conn,'utf8');
     $sql="Select MAX(danh_sach_luu_y.id_luu_y) AS id_luu_y,
@@ -60,6 +61,7 @@ LEFT JOIN
     account ON danh_sach_luu_y.id_account = account.ms
 LEFT JOIN
     class ON account.id_class = class.id_class
+where account.ten_tai_khoan like '%$noidung%' OR account.ms like '%$noidung%'
   GROUP BY account.ms";
 
     $result = mysqli_query($conn,$sql);

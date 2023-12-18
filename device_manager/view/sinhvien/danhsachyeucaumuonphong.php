@@ -1,18 +1,22 @@
 <?php
     $tensinhvien = $_SESSION['name'];
     $ma = $_SESSION['account'];
-    $tongkq = demkqtracuumuon($ms);
+    $tongkq = demkqtracuumuon($ms,$noidung,$ngayTimKiem);
     $item_per_page = 5;
     $currentpage = !empty($_GET['page'])?$_GET['page']:1;
     $offset = ($currentpage-1)*$item_per_page;
     $sotrang = ceil($tongkq/$item_per_page);
-    $result = tracuuycmuonphongsv($ma,$offset);
+    $result = tracuuycmuonphongsv($ma,$offset,$noidung,$ngayTimKiem);
 ?>
 <section id="main-content" class="column column-offset-20">
 <h1>
     Danh sách Yêu Cầu Của Bạn:
 </h1>
-<br>
+    <form action="index.php?act=danhsachyeucau" method="post">
+        <input  class="fa-search " type="text" name="noidungtimkiemlichsusv" placeholder="nhập nội dung tìm kiếm" >
+        <input type="date" name="ngaytimkiem" >
+        <input class="ui-icon-search" type="submit" value="Tìm" name="tim">
+    </form>
 <h2>
     Danh sách Phòng:
 </h2>

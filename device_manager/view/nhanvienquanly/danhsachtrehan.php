@@ -1,18 +1,21 @@
 <?php
 $tensinhvien = $_SESSION['name'];
 $ma = $_SESSION['account'];
-    $tongkq = demkqtracuutrehan($ngaymuon);
+    $tongkq = demkqtracuutrehan($ngaymuon, $noidung);
     $item_per_page = 5;
     $currentpage = !empty($_GET['page'])?$_GET['page']:1;
     $offset = ($currentpage-1)*$item_per_page;
     $sotrang = ceil($tongkq/$item_per_page);
-    $result = danhsachtrehan($ngaymuon,$offset);
+    $result = danhsachtrehan($ngaymuon,$offset, $noidung);
 ?>
 <section id="main-content" class="column column-offset-20">
     <h1>
         Danh Sách Mượn Đã Trễ Hạn:
     </h1>
-    <br>
+    <form action="index.php?act=danhsachtrehan" method="post">
+        <input  class="fa-search " type="date" name="noidungtimkiemtrehan" placeholder="nhập tên tài khoản hoặc mssv" >
+        <input class="ui-icon-search" type="submit" value="Tìm" name="tim">
+    </form>
     <h2>
         Danh sách Phòng:
     </h2>

@@ -339,6 +339,14 @@ $anh =$_SESSION['img'];
                     require '../../model/lichsuyeucau.php';
                     require 'lichsuyeucau.php';
                     break;
+                case 'xemprofile':
+                    $mssv = $_GET['mssv'];
+                    $ngaymuon = date('Y-m-d');
+                    require '../../model/profileuser.php';
+                    require '../../model/thongtinsinhvien.php';
+                    require 'nav_mac_dinh.php';
+                    require 'xemprofile.php';
+                    break;
             }
         ?>
     </section>

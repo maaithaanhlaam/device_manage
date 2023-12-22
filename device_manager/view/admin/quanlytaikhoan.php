@@ -1,10 +1,10 @@
 <?php
-$tongkq = demtaikhoan();
+$tongkq = demtaikhoan($noidung);
 $item_per_page = 5;
 $currentpage = !empty($_GET['page'])?$_GET['page']:1;
 $offset = ($currentpage-1)*$item_per_page;
 $sotrang = ceil($tongkq/$item_per_page);
-$result = danhsachtaikhoan($offset);
+$result = danhsachtaikhoan($offset,$noidung);
 $lop = danhsachlop();
 ?>
 
@@ -12,7 +12,10 @@ $lop = danhsachlop();
     <h2>
         DANH SÁCH PHÒNG
     </h2>
-    <a class="button" href="index.php?act=themtaikhoan" >Thêm tài khoản</a>
+        <form action="index.php?act=danhsachtaikhoan" method="post">
+            <input  class="fa-search " type="text" name="noidungtimkiemtaikhoanadmin" placeholder="nhập nội dung tìm kiếm" >
+            <input class="ui-icon-search" type="submit" value="Tìm" name="tim">
+        </form>    <a class="button" href="index.php?act=themtaikhoan" >Thêm tài khoản</a>
     <table  class="table" width="100%" >
         <thead class="thead-primary" style="background-color: #4e555b">
         <tr>
@@ -25,11 +28,12 @@ $lop = danhsachlop();
             <th class="column-10">trạng thái</th>
             <th class="column-10">sửa</th>
             <th class="column-10">vô hiệu hóa</th>
+            <th class="column-10">xóa</th>
         </tr>
         </thead>
         <?php foreach ($result as $each){?>
             <tr class="">
-                <td ><?php echo $each['ms'] ?></td>
+                <td ><a href="index.php?act=xemprofile&mssv=<?php echo $each['ms'] ?>"><?php echo $each['ms'] ?></a></td>
                 <td ><?php echo $each['ten_tai_khoan'] ?></td>
                 <td ><?php echo $each['email'] ?></td>
                 <td ><?php echo $each['password'] ?></td>
@@ -41,7 +45,7 @@ $lop = danhsachlop();
                     </div>
                     <div id="popup1&mataikhoan=<?php echo $each['ms']?>" class="overlay" style="top: -150px">
                         <div class="popup">
-                            <form action="index.php?act=capnhatthongtintaikhoan&mataikhoan=<?php echo $each['ms'] ?>" method="post" >
+                            <form action="index.php?act=capnhatthongtintaikhoan&mataikhoan=<?php echo $each['ms'] ?>" method="post" enctype="multipart/form-data" >
                                 <h1> Sửa phòng</h1>
                                 <a class="close" href="#">&times;</a>
                                 <label>Tên: </label>
@@ -52,6 +56,7 @@ $lop = danhsachlop();
                                 <input type="text" name="pass" value="<?php echo $each['password']?>" >
                                 <label>role: </label>
                                 <select name="role" >
+                                    <option value="">*Chọn role</option>
                                     <option value="nhanvienquanly">Nhân viên quản lý</option>
                                     <option value="sinhvien">Sinh viên</option>
                                     <option value="admin">admin</option>
@@ -69,7 +74,7 @@ $lop = danhsachlop();
                                 <label>trạng thái: </label>
                                 <input type="text" name="state" value="<?php echo $each['state']?>" >
                                 <label>ngày sinh: </label>
-                                <input type="text" name="ngaysinh" value="<?php echo $each['ngay_sinh']?>" >
+                                <input type="date" name="ngaysinh" value="<?php echo $each['ngay_sinh']?>" >
                                 <label> Giới tính: </label>
                                 <input type="text" name="gioitinh" value="<?php echo $each['gioi_tinh']?>" >
                                 <label>Địa chỉ: </label>
@@ -83,7 +88,7 @@ $lop = danhsachlop();
                 </td>
                 <?php if($each['state'] == 'kích hoạt'){?>
                     <td ><div class="box">
-                            <a class="button" href="#popup2&mataikhoan=<?php echo $each['ms']?>" style="background-color: #bd2130 ">Vô Hiệu Hóa</a>
+                            <a class="button" href="#popup2&mataikhoan=<?php echo $each['ms']?>" style="background-color: #ba8b00 ">Vô Hiệu Hóa</a>
                         </div>
                         <div id="popup2&mataikhoan=<?php echo $each['ms']?>" class="overlay" style="top: -150px">
                             <div class="popup">
@@ -114,7 +119,7 @@ $lop = danhsachlop();
                                     <input type="text" name="diachi" value="<?php echo $each['dia_chi']?>" readonly>
                                     <label>số điện thoại: </label>
                                     <input type="text" name="sdt" value="<?php echo $each['sdt']?>" readonly>
-                                    <input class="submit" type="submit"  value="Vô Hiệu hóa tài khoản" name="vohieuhoa" style="background-color: #bd2130">
+                                    <input class="submit" type="submit"  value="Vô Hiệu hóa tài khoản" name="vohieuhoa" style="background-color: #ba8b00">
                                 </form>
                             </div>
                         </div>
@@ -159,6 +164,46 @@ $lop = danhsachlop();
                         </div>
                     </td>
                 <?php } ?>
+                <td ><div class="box">
+                        <a class="button" href="#popup4&mataikhoan=<?php echo $each['ms']?>" style="background-color: #bd2130">Xóa</a>
+                    </div>
+                    <div id="popup4&mataikhoan=<?php echo $each['ms']?>" class="overlay" style="top: -150px">
+                        <div class="popup">
+                            <form action="index.php?act=xoataikhoan&mataikhoan=<?php echo $each['ms'] ?>" method="post" enctype="multipart/form-data" >
+                                <h1> Sửa phòng</h1>
+                                <a class="close" href="#">&times;</a>
+                                <label>Tên: </label>
+                                <input type="text" name="tentaikhoan" value="<?php echo $each['ten_tai_khoan']?>" readonly>
+                                <label>email: </label>
+                                <input type="text" name="email" value="<?php echo $each['email']?>" readonly>
+                                <label>password: </label>
+                                <input type="text" name="pass" value="<?php echo $each['password']?>" readonly>
+                                <label>role: </label>
+                                <input type="text" name="role" value="<?php echo $each['role']?>" readonly>
+                                <label>tên lớp: </label>
+                                <select name="lop" readonly="">
+                                    <?php foreach ($lop as $option){?>
+                                        <option value="<?php echo $option['id_class']?>"><?php echo $option['ten_lop']?></option>
+                                    <?php }?>
+                                </select>
+                                <label>Hình ảnh: </label>
+                                <input type="text" name="img" value="<?php echo $each['img']?>"readonly >
+                                <br>
+                                <label>trạng thái: </label>
+                                <input type="text" name="state" value="<?php echo $each['state']?>" readonly>
+                                <label>ngày sinh: </label>
+                                <input type="date" name="ngaysinh" value="<?php echo $each['ngay_sinh']?>" readonly>
+                                <label> Giới tính: </label>
+                                <input type="text" name="gioitinh" value="<?php echo $each['gioi_tinh']?>" readonly>
+                                <label>Địa chỉ: </label>
+                                <input type="text" name="diachi" value="<?php echo $each['dia_chi']?>" readonly>
+                                <label>số điện thoại: </label>
+                                <input type="text" name="sdt" value="<?php echo $each['sdt']?>" readonly>
+                                <input class="submit" type="submit"  value="Xóa tài khoản" name="xoataikhoan" style="background-color: #bd2130">
+                            </form>
+                        </div>
+                    </div>
+                </td>
         <?php } ?>
     </table>
 <?php for($num = 1;$num <= $sotrang;$num++){

@@ -1,10 +1,10 @@
 <?php
-    $tongkq = demphonghoc();
+    $tongkq = demphonghoc($noidung);
     $item_per_page = 5;
     $currentpage = !empty($_GET['page'])?$_GET['page']:1;
     $offset = ($currentpage-1)*$item_per_page;
     $sotrang = ceil($tongkq/$item_per_page);
-    $result = danhsachphonghoc($offset);
+    $result = danhsachphonghoc($offset,$noidung);
     $tang = danhsachtang();
 ?>
 
@@ -12,6 +12,10 @@
     <h2>
        DANH SÁCH PHÒNG
     </h2>
+    <form action="index.php?act=danhsachphong" method="post">
+        <input  class="fa-search " type="text" name="noidungtimkiemphongadmin" placeholder="nhập nội dung tìm kiếm" >
+        <input class="ui-icon-search" type="submit" value="Tìm" name="tim">
+    </form>
     <a class="button" href="index.php?act=themphong" >Thêm phòng học</a>
     <table  class="table" width="100%" >
         <thead class="thead-primary" style="background-color: #4e555b">

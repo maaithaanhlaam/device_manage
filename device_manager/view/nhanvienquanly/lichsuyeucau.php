@@ -55,7 +55,7 @@ $result = tracuuyc($offset,$noidung,$ngayTimKiem);
                 else{
                     echo '';
                 }?></td>
-            <td ><?php echo $each['ten_tai_khoan'] .'['.$each['ms'].']'.'['.$each['ten_lop'].']' ?></td>
+            <td ><a href="index.php?act=xemprofile&mssv=<?php echo $each['ms'] ?>"><?php echo $each['ten_tai_khoan'] .'['.$each['ms'].']'.'['.$each['ten_lop'].']' ?></a></td>
             <td ><?php $ngay_dang_ky_timestamp = strtotime($each['ngay_dang_ky']);
                 echo date("d/m/Y H:i",$ngay_dang_ky_timestamp) ?></td>
         <?php }?>

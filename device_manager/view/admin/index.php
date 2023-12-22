@@ -61,6 +61,8 @@ $anh =$_SESSION['img'];
     }
     switch ($act){
         case '':
+            unset($_SESSION['noidungtimkiemtaikhoanadmin']);
+            unset($_SESSION['noidungtimkiemphongadmin']);
             $mssv = $_SESSION['account'];
             require 'nav_mac_dinh.php';
             require '../../model/profileuser.php';
@@ -77,15 +79,30 @@ $anh =$_SESSION['img'];
             unset( $_SESSION['mindate']);
             unset( $_SESSION['maxdate']);
             unset($_SESSION['ngaymuon']);
+            unset($_SESSION['noidungtimkiemphongadmin']);
+            unset($_SESSION['noidungtimkiemtaikhoanadmin']);
             header('location: ../../index.php');
             break;
         case 'changepass':
+            unset($_SESSION['noidungtimkiemtaikhoanadmin']);
+            unset($_SESSION['noidungtimkiemphongadmin']);
             $email=$_SESSION['email'];
             $img = $_SESSION['img'];
             require 'nav_mac_dinh.php';
             require 'changepass.php';
             break;
         case 'danhsachphong':
+            unset($_SESSION['noidungtimkiemtaikhoanadmin']);
+            if(!isset($_SESSION['noidungtimkiemphongadmin'])){
+                $noidung = 'phòng ';
+            }
+            if(isset($_SESSION['noidungtimkiemphongadmin'])){
+                $noidung = $_SESSION['noidungtimkiemphongadmin'];
+            }
+            if(isset($_POST['noidungtimkiemphongadmin'])) {
+                $noidung = $_POST['noidungtimkiemphongadmin'];
+                $_SESSION['noidungtimkiemphongadmin'] = $noidung;
+            }
             require 'nav_mac_dinh.php';
             require '../../model/all_tang.php';
             require '../../model/quanlyphonghoc.php';
@@ -105,6 +122,7 @@ $anh =$_SESSION['img'];
             header('location:index.php?act=danhsachphong');
             break;
         case 'themphong':
+            require 'nav_mac_dinh.php';
             require '../../model/all_tang.php';
             require 'themphong.php';
             break;
@@ -116,6 +134,8 @@ $anh =$_SESSION['img'];
             header('location:index.php?act=danhsachphong');
             break;
         case 'danhsachtang':
+            unset($_SESSION['noidungtimkiemtaikhoanadmin']);
+            unset($_SESSION['noidungtimkiemphongadmin']);
             require 'nav_mac_dinh.php';
             require '../../model/all_tang.php';
             require 'quanlytang.php';
@@ -142,6 +162,17 @@ $anh =$_SESSION['img'];
             header('location:index.php?act=danhsachtang');
             break;
         case 'danhsachtaikhoan':
+            unset($_SESSION['noidungtimkiemphongadmin']);
+            if(!isset($_SESSION['noidungtimkiemtaikhoanadmin'])){
+                $noidung = 1;
+            }
+            if(isset($_SESSION['noidungtimkiemtaikhoanadmin'])){
+                $noidung = $_SESSION['noidungtimkiemtaikhoanadmin'];
+            }
+            if(isset($_POST['noidungtimkiemtaikhoanadmin'])) {
+                $noidung = $_POST['noidungtimkiemtaikhoanadmin'];
+                $_SESSION['noidungtimkiemtaikhoanadmin'] = $noidung;
+            }
             require 'nav_mac_dinh.php';
             require '../../model/danhsachtaikhoan.php';
             require '../../model/demlop.php';
@@ -153,7 +184,7 @@ $anh =$_SESSION['img'];
             $email = $_POST['email'];
             $role = $_POST['role'];
             $idlop = $_POST['lop'];
-            $img = $_POST['img'];
+            $img = $_FILES['img']['tmp_name'];;
             $state = $_POST['state'];
             $ngaysinh = $_POST['ngaysinh'];
             $gioitinh = $_POST['gioitinh'];
@@ -191,6 +222,27 @@ $anh =$_SESSION['img'];
             $ma = $_GET['mataikhoan'];
             require '../../model/adminvohieutaikhoan.php';
             header('location:index.php?act=danhsachtaikhoan');
+            break;
+        case 'kichhoatlai':
+            $tensinhvien = $_POST['tentaikhoan'];
+            $email = $_POST['email'];
+            $idclass = $_POST['idclass'];
+            $ma = $_GET['mataikhoan'];
+            require '../../model/adminkichhoattaikhoan.php';
+            header('location:index.php?act=danhsachtaikhoan');
+            break;
+        case 'xoataikhoan':
+            $ms = $_GET['mataikhoan'];
+            require '../../model/xoataikhoan.php';
+            header('location:index.php?act=danhsachtaikhoan');
+            break;
+        case 'xemprofile':
+            $mssv = $_GET['mssv'];
+            $ngaymuon = date('Y-m-d');
+            require '../../model/profileuser.php';
+            require '../../model/thongtinsinhvien.php';
+            require 'nav_mac_dinh.php';
+            require 'xemprofile.php';
             break;
     }
     ?>

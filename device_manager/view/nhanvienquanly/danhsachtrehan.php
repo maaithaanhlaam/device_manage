@@ -52,7 +52,7 @@ $ma = $_SESSION['account'];
                     else{
                         echo '';
                     }?></td>
-                <td ><?php echo $each['ten_tai_khoan'] .'['.$each['ms'].']' ?></td>
+                <td ><a href="index.php?act=xemprofile&mssv=<?php echo $each['ms'] ?>"><?php echo $each['ten_tai_khoan'] .'['.$each['ms'].']' ?></a></td>
                 <td ><div class="box">
                         <a class="button" href="#popup1&mamuon=<?php echo $each['id_muon'] ?>">Mail Cảnh Báo</a>
                     </div>

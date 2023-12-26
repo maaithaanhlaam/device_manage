@@ -10,7 +10,7 @@ $result = tracuuyc($offset,$noidung,$ngayTimKiem);
 ?>
 <section id="main-content" class="column column-offset-20">
     <h1>
-        Danh sách Yêu Cầu Mượn Phòng:
+        Lịch Sử Yêu Cầu Trong Hệ Thống:
     </h1>
     <form action="index.php?act=lichsuyeucau" method="post">
         <input  class="fa-search " type="text" name="noidungtimkiemlichsu" placeholder="nhập nội dung tìm kiếm" >

@@ -195,11 +195,12 @@ $anh =$_SESSION['img'];
                 case 'xacnhantraphong':
                     $id_yeu_cau = $_GET['mayeucau'];
                     $idmuon = $_POST['idmuon'];
+                    echo $idmuon;
                     $thoigianmuon = $_POST['thoigianmuon'];
                     $idphong = $_POST['idphong'];
                     require 'nav_mac_dinh.php';
                     require '../../model/xacnhantraphong.php';
-                    header('location:index.php?act=danhsachyeucautraphong');
+/*                    header('location:index.php?act=danhsachyeucautraphong');*/
                     break;
                 case 'danhsachtrehan':
                     unset($_SESSION['noidungtimkiemyeucaumuonphongphong']);

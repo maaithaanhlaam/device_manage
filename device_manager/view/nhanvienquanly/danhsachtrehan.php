@@ -59,7 +59,7 @@ $ma = $_SESSION['account'];
                     <div id="popup1&mamuon=<?php echo $each['id_muon'] ?>" class="overlay">
                         <div class="popup">
                             <form action="index.php?act=guimailcanhcao&mamuon=<?php echo $each['id_muon'] ?>" method="post">
-                                <h1> Chọn Thời Mốc Thời Gian</h1>
+                                <h1> Gửi Email Cảnh Báo</h1>
                                 <a class="close" href="#">&times;</a>
                                 <label>Phòng: </label>
                                 <input type="text" name="tenphong" value="<?php echo $each['ten_phong']?>" readonly>

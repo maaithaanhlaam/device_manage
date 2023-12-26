@@ -51,11 +51,11 @@ $ma = $_SESSION['account'];
                     else{
                         echo '';
                     }?></td>
-                <td ><?php echo $each['ten_tai_khoan'] .'['.$each['ms'].']'.'['.$each['ten_lop'].']' ?></td>
+                <td ><a href="index.php?act=xemprofile&mssv=<?php echo $each['ms'] ?>"><?php echo $each['ten_tai_khoan'] .'['.$each['ms'].']'.'['.$each['ten_lop'].']' ?></a></td>
                 <td ><?php echo $each['state']  ?></td>
                 <td ><?php if($each['state'] == 'kích hoạt'){?>
                         <div class="box">
-                            <a class="button" href="#popup1&maluuy=<?php echo $each['id_luu_y'] ?>">Vô Hiệu Hóa</a>
+                            <a class="button" href="#popup1&maluuy=<?php echo $each['id_luu_y'] ?>" style="background-color: #bd2130">Vô Hiệu Hóa</a>
                         </div>
                         <div id="popup1&maluuy=<?php echo $each['id_luu_y'] ?>" class="overlay">
                             <div class="popup">
@@ -93,14 +93,14 @@ $ma = $_SESSION['account'];
                                         <input type="hidden" name="chieu" value="0" >
                                     <?php }
                                     ?>
-                                    <input class="submit" type="submit" value="Vô Hiệu Hóa" name="vohieu">
+                                    <input class="submit" type="submit" value="Vô Hiệu Hóa" name="vohieu" style="background-color: #bd2130">
                                 </form>
                             </div>
                         </div>
                     <?php } ?>
                     <?php if($each['state'] == 'vô hiệu hóa'){?>
                         <div class="box">
-                            <a class="button" href="#popup2&maluuy=<?php echo $each['id_luu_y'] ?>">Kích Hoạt</a>
+                            <a class="button" href="#popup2&maluuy=<?php echo $each['id_luu_y'] ?>" style="background-color: #1e7e34">Kích Hoạt</a>
                         </div>
                         <div id="popup2&maluuy=<?php echo $each['id_luu_y'] ?>" class="overlay">
                             <div class="popup">
@@ -138,7 +138,7 @@ $ma = $_SESSION['account'];
                                         <input type="hidden" name="chieu" value="0" >
                                     <?php }
                                     ?>
-                                    <input class="submit" type="submit" value="Kích Hoạt Lại" name="kichhoat">
+                                    <input class="submit" type="submit" value="Kích Hoạt Lại" name="kichhoat" style="background-color: #1e7e34">
                                 </form>
                             </div>
                         </div>

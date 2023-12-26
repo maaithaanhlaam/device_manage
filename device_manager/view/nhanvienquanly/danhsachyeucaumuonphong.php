@@ -66,7 +66,7 @@
                 <div id="popup1&mayeucau=<?php echo $each['id_yeu_cau'] ?>" class="overlay">
                     <div class="popup">
                         <form action="index.php?act=xacnhanmuonphong&mayeucau=<?php echo $each['id_yeu_cau'] ?>" method="post">
-                            <h1> Chọn Thời Mốc Thời Gian</h1>
+                            <h1> Xác Nhận Cho Mượn</h1>
                             <a class="close" href="#">&times;</a>
                             <label>Phòng: </label>
                             <input type="text" name="tenphong" value="<?php echo $each['ten_phong']?>" readonly>
@@ -105,7 +105,7 @@
                     </div>
                 </div>
             </td>
-            <td><a class="button" href="index.php?act=huymuonphong&mayeucau=<?php echo $each['id_yeu_cau'] ?>">Từ Chối</a></td>
+            <td><a class="button" href="index.php?act=huymuonphong&mayeucau=<?php echo $each['id_yeu_cau'] ?>" style="background-color: #bd2130">Từ Chối</a></td>
         </tr>
     <?php } ?>
 </table>

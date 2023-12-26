@@ -35,7 +35,7 @@ GROUP BY
     danh_sach_yeu_cau_phong.chieu,
     danh_sach_yeu_cau_phong.id_account,
     danh_sach_yeu_cau_phong.trang_thai
-ORDER BY ngay_dang_ky, ten_phong, ngay_muon desc LIMIT 5 offset ".$offset."
+ORDER BY ngay_dang_ky desc LIMIT 5 offset ".$offset."
 ";
     $kqtracuulop = mysqli_query($conn, $sql);
     return $kqtracuulop;
@@ -75,7 +75,7 @@ GROUP BY
     danh_sach_yeu_cau_phong.chieu,
     danh_sach_yeu_cau_phong.id_account,
     danh_sach_yeu_cau_phong.trang_thai
-ORDER BY ngay_dang_ky, ten_phong, ngay_muon desc 
+ORDER BY ngay_dang_ky desc 
 ";
     $kqtracuulop = mysqli_query($conn, $sql);
     return $kqtracuulop->num_rows;
